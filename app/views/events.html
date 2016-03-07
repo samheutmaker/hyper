@@ -1,3 +1,6 @@
-<main data-ng-controller="EventPageController">
-	<event-container events="events"></event-container>
-</main>
+<section class="page-container" data-ng-controller="EventPageController">
+	<event-controls>
+		<event-container events="events" filter="filter">
+		</event-container>
+	</event-controls>
+</section>

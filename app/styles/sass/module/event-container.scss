@@ -1,27 +1,64 @@
-.event-container{
-	position: relative;
-	height: 700px;
-	width: 1000px;
-	margin: 0 auto;
-	background-color: white;
-	border: 1px solid black;
+$width: 100%;
 
-	.event-container-inside{
-		position: relative;
-		height: 100%;
-		width: 100%;
-		margin: 0px 5px 0px 5px;
-		padding: 0px;
+.event-container {
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: calc(100% - 200px);
+    left: 200px;
+    background-color: white;
+    overflow: none;
+
+    .event-container-inside {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: 0px 5px 0px 5px;
+        padding: 0px;
+        left: 0px;
+        overflow: scroll;
+
+        .event-wrapper {
+        	position: relative;
+            
+            margin: 0 auto;
+            height: 1000px;
+        
+	      @media screen and (min-width: 740px) {
+				width: 540px;
+            }
+
+            @media screen and (min-width: 1010px) {
+				width: 810px;
+            }
+            @media screen and (min-width: 1280px) {
+				width: 1080px;
+            }
 
 
-		.event-item{
-			height: 250px;
-			width: 200px;
-			background-color: lightblue;
-			border-radius: 5px;
-			float: left;
-			margin: 10px;
-		}
-	}
+            .event-item {
+                position: relative;
+                width: 230px;
+                height: 280px;
+                padding-left: 10px;
+                padding-right: 10px;
+                margin: 10px;
 
+                // background-color: #D7DAE7;
+
+                background-color: #D7DAE7;
+                float: left;
+                -webkit-box-shadow: 0px 2px 12px -3px rgba(0, 0, 0, 0.5);
+                -moz-box-shadow: 0px 2px 12px -3px rgba(0, 0, 0, 0.5);
+                box-shadow: 0px 2px 12px -3px rgba(0, 0, 0, 0.5);
+                border-radius: 5px 5px 5px 5px;
+                -moz-border-radius: 5px 5px 5px 5px;
+                -webkit-border-radius: 5px 5px 5px 5px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
 }

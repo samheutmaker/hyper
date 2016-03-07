@@ -1,10 +1,13 @@
 var angular = require('angular');
 
-var hyper = angular.module('hyper', []);
+require('angular-animate');
+
+var hyper = angular.module('hyper', ['ngAnimate']);
 
 require('./components/events/events-index')(hyper);
+require('./components/controls/controls-index')(hyper);
 require('./components/auth/auth-index')(hyper);
-require('./services/services-index')(hyper)
+require('./services/services-index')(hyper);
 
 
 

@@ -5,7 +5,15 @@ module.exports = function(app) {
       templateUrl: 'templates/event-container.html',
       replace: true,
       scope: {
-        events: '='
+        events: '=',
+        filter: '='
+      },
+      link: function($scope) {
+        $scope.$watch(function(){
+          return $scope.filter;
+        }, function(){
+          console.log($scope.filter);
+        })
       },
       controller: function($scope) {
 

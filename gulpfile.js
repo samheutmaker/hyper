@@ -8,7 +8,9 @@ const files = {
     __dirname + '/app/*.html',
     __dirname + '/app/js/*.js'
   ],
-  sass: [__dirname + '/app/styles/sass/**/*.scss']
+  sass: [__dirname + '/app/styles/sass/**/*.scss',
+         __dirname + '/app/styles/css/*.css'
+  ]
 };
 
 
