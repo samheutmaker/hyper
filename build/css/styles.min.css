@@ -9,6 +9,30 @@ nav {
   position: relative;
   background-color: lightblue; }
 
+.auth-container {
+  position: absolute;
+  height: 400px;
+  width: 600px;
+  background-color: rgba(173, 191, 204, 0.9);
+  left: calc((100% - 600px)/2);
+  top: calc((100% - 420px)/2);
+  border-radius: 5px; }
+  .auth-container .auth-box {
+    position: relative;
+    color: black;
+    height: auto;
+    width: 300px;
+    margin: 0 auto;
+    top: 60px; }
+    .auth-container .auth-box .input {
+      position: relative;
+      width: 100%;
+      color: black;
+      margin-bottom: 10px; }
+    .auth-container .auth-box .message {
+      font-size: 18px;
+      color: black; }
+
 .event-container {
   position: relative;
   height: 700px;

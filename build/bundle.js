@@ -50,28 +50,49 @@
 
 	__webpack_require__(3)(hyper);
 	__webpack_require__(5)(hyper);
+	__webpack_require__(7)(hyper)
+
+
+
+
+	// Add Token Middleware
+	hyper.config(function($httpProvider) {
+	  $httpProvider.interceptors.push('authInterceptor');
+	})
+	  .run(function($window, EE, $rootScope) {
+	    if ($window.sessionStorage.token && $window.sessionStorage._id) {
+	      $rootScope.authenticated = true;
+	    }
+	  })
+
 
 	hyper.controller('HomeController', ['$scope',
 	  function($scope) {
-	    
+
+	    $scope.showEvents = false;
+
+	    $scope.$on('USER_AUTHENTICATED', function() {
+	      $scope.showEvents = true;
+	    })
 	  }
 	]);
 
 	hyper.controller('EventPageController', ['$scope',
-	function($scope) {
+	  function($scope) {
 
-	  $scope.events = [{
-	    _id: 12345,
-	    name: 'another'
-	  }, {
-	    _id: 12345,
-	    name: 'another'
-	  }, {
-	    _id: 12345,
-	    name: 'another'
-	  }];
+	    $scope.events = [{
+	      _id: 12345,
+	      name: 'another'
+	    }, {
+	      _id: 12345,
+	      name: 'another'
+	    }, {
+	      _id: 12345,
+	      name: 'another'
+	    }];
 
-	}])
+	  }
+	])
 
 /***/ },
 /* 1 */
@@ -30547,12 +30568,102 @@
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(app) {
+	module.exports = function(app){
 		__webpack_require__(6)(app);
 	}
 
 /***/ },
 /* 6 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+		//Auth Controller
+	  app.controller('AuthController', ['$scope', '$rootScope', 'EE', '$window',
+	    '$timeout',
+	    function($scope, $rootScope, EE, $window, $timeout) {
+	      if ($rootScope.authenticated) {
+	        $timeout(function() {
+	          EE.emit('USER_AUTHENTICATED', $window.sessionStorage._id);
+	        }, 100);
+
+	      } else {
+	        $scope.showAuthBox = true;
+	        $rootScope.authenticated = true;
+	      }
+
+	      $scope.$on('USER_AUTHENTICATED', () => {
+	        $scope.showAuthBox = false;
+	      })
+	    }
+	  ])
+	  // Login Controller
+	  .controller('LoginController', ['$scope', '$location', '$window',
+	    'EE', 'AuthFactory', '$rootScope',
+	    function($scope, $location, $window, EE, AuthFactory, $rootScope) {
+	      // Login function
+	      $scope.login = function(loginModel) {
+	        // Call login function from Auth Factory
+	        AuthFactory.login(loginModel).then(function(res) {
+	          // Check for token
+	          if (res.data.token) {
+	            // Save token
+	            $window.sessionStorage.token = res.data.token;
+	            // Save user ID
+	            $window.sessionStorage._id = res.data.user._id
+	            // Broadcast event and user ID
+	            EE.emit('USER_AUTHENTICATED', res.data.user._id);
+	          } else {
+	            // Alert no user
+	            $rootScope.loginMessage = 'No User Found.'
+	          }
+	          // Check for error
+	        }, function(err) {
+	          $rootScope.loginMessage = err.data.msg;
+	        });
+	      };
+	    }
+	  ])
+	  //Register Controller
+	  .controller('RegisterController', ['$scope', '$location', '$window',
+	    'EE', 'AuthFactory', '$rootScope',
+	    function($scope, $location, $window, EE, AuthFactory, $rootScope) {
+	      // Login function
+	      $scope.register = function(registerModel) {
+	        AuthFactory.register(registerModel).then(function(res) {
+	          if (res.data.token) {
+	            // Save token
+	            $window.sessionStorage.token = res.data.token;
+	            // Save user ID
+	            $window.sessionStorage._id = res.data.user._id
+	            // Broadcast event and user ID
+	            EE.emit('USER_AUTHENTICATED', res.data.user._id);
+	          } else {
+	            // Alert no user
+	            $rootScope.loginMessage = 'Email already registered.'
+	          }
+	          // Check for error
+	        }, function(err) {
+	          $rootScope.loginMessage =
+	            'There was an error. Please try again.'
+	        })
+	      };
+	    }
+	  ])
+	}
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+		__webpack_require__(8)(app);
+		__webpack_require__(9)(app);
+		__webpack_require__(10)(app);
+		__webpack_require__(11)(app);
+	}
+
+/***/ },
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = function(app) {
@@ -30572,6 +30683,93 @@
 	      }
 	    }
 	  ])
+	}
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	// Event Emitter
+	module.exports = function(app) {
+	  app.factory('EE', ['$rootScope',
+	    function($rootScope) {
+	      return {
+	        emit: function(event, data) {
+	          $rootScope.$broadcast(event, data);
+	        }
+	      }
+	    }
+	  ]);
+	}
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	// Handles Token Retrevial and Creation
+	module.exports = function(app) {
+	  app.factory('AuthFactory', ['$http',
+	    function($http) {
+	      var baseURI = 'http://192.168.99.100:8888/auth'
+	      return {
+	        login: function(data) {
+
+	          var headerData = data.email + ':' + data.password;
+	          var headerData = btoa(headerData);
+
+	          return $http({
+	            method: 'GET',
+	            url: baseURI + '/login',
+	            headers: {
+	              authorization: 'Basic ' + headerData
+	            }
+	          });
+	        },
+	        register: function(data) {
+	          var toSend = {
+	            authentication: {
+	              email: data.email,
+	              password: data.password
+	            }
+	          };
+
+	          return $http({
+	            method: 'POST',
+	            url: baseURI + '/register',
+	            data: toSend
+	          });
+	        }
+	      }
+	    }
+	  ]);
+	}
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	// Attaches token to evey request
+	module.exports = function(app) {
+	  app.factory('authInterceptor', ['$rootScope', '$q', '$window',
+	    function($rootScope, $q, $window) {
+	      return {
+	        request: function(req) {
+	          req.headers = req.headers || {};
+	          if ($window.sessionStorage.token) {
+	            // retrieve token from session storage if it exists; store in config object
+	            req.headers.token = $window.sessionStorage.token;
+	          }
+	          return req;
+	        },
+	        response: function(response) {
+	          if (response.status === 401) {
+	            // handle the case where the user is not authenticated
+	          }
+	          return response || $q.when(response);
+	        }
+	      };
+	    }
+	  ]);
 	}
 
 /***/ }
