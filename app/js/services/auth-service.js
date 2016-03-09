@@ -2,7 +2,7 @@
 module.exports = function(app) {
   app.factory('AuthFactory', ['$http',
     function($http) {
-      var baseURI = 'http://192.168.99.100:8888/auth'
+      var baseURI = BASE_URI + '/auth'
       return {
         login: function(data) {
 

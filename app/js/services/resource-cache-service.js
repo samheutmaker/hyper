@@ -1,7 +1,7 @@
 module.exports = function(app) {
   app.factory('Events', ['$http', 'EE',
     function($http, EE) {
-    	var baseURI = 'http://192.168.99.100:8888/api/events';
+    	var baseURI = BASE_URI + '/api/events';
     	const Events = {
     		events: {},
     		userEvents: {},

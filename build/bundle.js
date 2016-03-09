@@ -34873,12 +34873,12 @@
 
 /***/ },
 /* 12 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
 	  app.factory('Events', ['$http',
 	    function($http) {
-	      const baseURI = 'http://localhost:8888';
+	      const baseURI = ("http://192.168.99.100:8888");
 	      const eventService = {
 	      	// Search Events
 	        search: function(queryObj, callback) {
@@ -34913,13 +34913,13 @@
 
 /***/ },
 /* 14 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	// Handles Token Retrevial and Creation
 	module.exports = function(app) {
 	  app.factory('AuthFactory', ['$http',
 	    function($http) {
-	      var baseURI = 'http://192.168.99.100:8888/auth'
+	      var baseURI = ("http://192.168.99.100:8888") + '/auth'
 	      return {
 	        login: function(data) {
 
@@ -34983,12 +34983,12 @@
 
 /***/ },
 /* 16 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
 	  app.factory('Events', ['$http', 'EE',
 	    function($http, EE) {
-	    	var baseURI = 'http://192.168.99.100:8888/api/events';
+	    	var baseURI = ("http://192.168.99.100:8888") + '/api/events';
 	    	const Events = {
 	    		events: {},
 	    		userEvents: {},

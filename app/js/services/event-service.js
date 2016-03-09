@@ -1,7 +1,7 @@
 module.exports = function(app) {
   app.factory('Events', ['$http',
     function($http) {
-      const baseURI = 'http://localhost:8888';
+      const baseURI = BASE_URI;
       const eventService = {
       	// Search Events
         search: function(queryObj, callback) {
