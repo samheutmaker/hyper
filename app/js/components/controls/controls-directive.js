@@ -26,7 +26,7 @@ module.exports = function(app) {
         // Animation
         // $timeout(function() {
         //   $scope.state.showControls = true
-        // }, 10);
+        // }, 10)
 
 
         // Get current events
