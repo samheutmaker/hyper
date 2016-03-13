@@ -10,13 +10,16 @@ $main_color: #2F264C;
     position: relative;
 
     .controls {
-        background-color: $main_color;
+        background-color: darken(#D7DAE7, 45%);
         height: 100%;
         position: relative;
         width: 200px;
         margin: 0px;
         padding: 0px;
         z-index: 100000000;
+        -webkit-box-shadow: 0px 2px 12px -3px rgba(0, 0, 0, 1.0);
+        -moz-box-shadow: 0px 2px 12px -3px rgba(0, 0, 0, 1.0);
+        box-shadow: 0px 2px 12px -3px rgba(0, 0, 0, 1.0);
 
         .controls-list {
             padding: 0px;
@@ -28,6 +31,12 @@ $main_color: #2F264C;
             li {
                 margin: 0px;
                 height: 100px;
+                text-align: center;
+                color: white;
+
+                &:hover{
+                    cursor: pointer;
+                }
             }
         }
     }
