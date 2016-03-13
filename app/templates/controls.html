@@ -1,6 +1,6 @@
-<section class="controls-container">
+<section class="controls-container" data-ng-init="getCurrentEvents()">
 	
-	<section class="controls">
+	<section class="controls ng-trans ng-trans-slide-left" data-ng-if="state.showControls">
 		<ul class="controls-list">
 			<li data-ng-click="state.searching = !state.searching">Search Events</li>
 			<li data-ng-click="">My Events</li>
@@ -10,9 +10,9 @@
 
 
 
-	<section class="search-container ng-trans ng-trans-slide-left" data-ng-show="state.searching">
+	<section class="search-container ng-trans ng-trans-slide-left" data-ng-if="state.searching">
 		<form >
-			<input type="text" ng-model="filter">
+			<input type="text" ng-model="state.filter">
 		</form>
 	</section>
 

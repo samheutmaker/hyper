@@ -3,3 +3,19 @@ body, html {
 	padding: 0px;
 	margin: 0px;
 }
+
+
+$anchor_color: darken(#D7DAE7, 45%);
+
+a {
+	color: $anchor_color;
+
+	&:visted, :active {
+		color: $anchor_color;
+	}
+
+	&:hover {
+		color: lighten($anchor_color, 10%);
+	}
+
+}

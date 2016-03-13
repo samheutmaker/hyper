@@ -1,14 +1,22 @@
 var angular = require('angular');
 
+require('angular-route');
 require('angular-animate');
 
-var hyper = angular.module('hyper', ['ngAnimate']);
+var hyper = angular.module('hyper', ['ngRoute', 'ngAnimate']);
 
 require('./components/events/events-index')(hyper);
 require('./components/controls/controls-index')(hyper);
 require('./components/auth/auth-index')(hyper);
 require('./services/services-index')(hyper);
 
+hyper.config(['$routeProvider', '$locationProvider',
+  function($routeP, $locationP) {
+    $routeP
+    .when('/list', {
+      templateUrl: 'views/events.html'
+    })
+  }])
 
 
 
@@ -22,6 +30,11 @@ hyper.config(function($httpProvider) {
     }
   })
 
+hyper.controller('NavController', ['$scope',
+  function($scope) {
+
+  }
+]);
 
 hyper.controller('HomeController', ['$scope',
   function($scope) {
@@ -37,16 +50,6 @@ hyper.controller('HomeController', ['$scope',
 hyper.controller('EventPageController', ['$scope',
   function($scope) {
 
-    $scope.events = [{
-      _id: 12345,
-      name: 'another'
-    }, {
-      _id: 12345,
-      name: 'another'
-    }, {
-      _id: 12345,
-      name: 'another'
-    }];
 
   }
 ])

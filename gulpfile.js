@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const webpack = require('webpack-stream');
+const webpackEnv = require('webpack-env');
 const concat = require('gulp-concat');
 
 const files = {
@@ -26,7 +27,8 @@ gulp.task('webpack:dev', () => {
     .pipe(webpack({
       output: {
         filename: 'bundle.js'
-      }
+      },
+      plugins: [webpackEnv]
     }))
     .pipe(gulp.dest(__dirname + '/build/'))
 });
@@ -48,5 +50,7 @@ gulp.task('sass:watch', function() {
 gulp.task('dev:watch', () => {
   gulp.watch(files.all, ['webpack:dev', 'html:dev'])
 });
+
+gulp.task('build:dev', ['sass:all', 'webpack:dev', 'html:dev']);
 
 gulp.task('default', ['dev:watch', 'sass:watch']);
