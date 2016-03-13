@@ -1,0 +1,20 @@
+<section class="controls-container">
+	
+	<section class="controls">
+		<ul class="controls-list">
+			<li data-ng-click="state.searching = !state.searching">Search Events</li>
+			<li data-ng-click="">My Events</li>
+			<li data-ng-click="">Post Event</li>
+		</ul>
+	</section>
+
+
+
+	<section class="search-container ng-trans ng-trans-slide-left" data-ng-show="state.searching">
+		<form >
+			<input type="text" ng-model="filter">
+		</form>
+	</section>
+
+	<ng-transclude></ng-transclude>
+</section>

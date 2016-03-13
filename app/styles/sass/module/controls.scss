@@ -1,0 +1,34 @@
+$main_color: #2F264C;
+
+.controls-container {
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+
+    .controls {
+        background-color: $main_color;
+        height: 100%;
+        position: relative;
+        width: 200px;
+        margin: 0px;
+        padding: 0px;
+        z-index: 100000000;
+
+        .controls-list {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            top: 20px;
+            position: relative;
+
+            li {
+                margin: 0px;
+                height: 100px;
+            }
+        }
+    }
+}
