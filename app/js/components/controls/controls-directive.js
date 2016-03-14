@@ -19,22 +19,22 @@ module.exports = function(app) {
           userEvents: true,
           searching: false,
           map: false,
-          showControls: true,
+          showControls: false,
           filter: ""
         };
 
-        // Animation
-        // $timeout(function() {
-        //   $scope.state.showControls = true
-        // }, 10)
+        // Animatio
+        $timeout(function() {
+          $scope.state.showControls = true
+        }, 10)
 
 
         // Get current events
         $scope.getCurrentEvents = function() {
           if (Events.events.length) {
-            // $timeout(function(){
+            $timeout(function(){
               $scope.events = Events.events;  
-            // }, 250);
+            }, 250);
           } else {
             Events.getCurrentEvents()
               .then(() => {

@@ -1,0 +1,7 @@
+<section class="page-container" data-ng-controller="PostPageController">
+	<button data-ng-click="state.creating = !state.creating">New Post</button>
+	
+	<div data-ng-show="state.creating" class="ng-trans-fade ng-trans" >
+	<post-item ></post-item>
+</div>
+</section>

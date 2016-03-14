@@ -5,18 +5,23 @@ require('angular-animate');
 
 var hyper = angular.module('hyper', ['ngRoute', 'ngAnimate']);
 
+require('./components/auth/auth-index')(hyper);
+require('./components/post/post-index')(hyper);
 require('./components/events/events-index')(hyper);
 require('./components/controls/controls-index')(hyper);
-require('./components/auth/auth-index')(hyper);
 require('./services/services-index')(hyper);
 
 hyper.config(['$routeProvider', '$locationProvider',
   function($routeP, $locationP) {
     $routeP
-    .when('/list', {
-      templateUrl: 'views/events.html'
-    })
-  }])
+      .when('/list', {
+        templateUrl: 'views/events.html'
+      })
+      .when('/post', {
+        templateUrl: 'views/post.html'
+      })
+  }
+])
 
 
 
@@ -47,9 +52,25 @@ hyper.controller('HomeController', ['$scope',
   }
 ]);
 
+hyper.controller('PostPageController', ['$scope',
+  function($scope) {
+
+    // Track state
+    $scope.state = {
+      creating: false,
+    };
+      
+    // Create new post
+    $scope.newPost = function() {
+      $scope.creating = true;
+    }
+
+  }
+]);
+
 hyper.controller('EventPageController', ['$scope',
   function($scope) {
 
 
   }
-])
+]);

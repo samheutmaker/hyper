@@ -1,0 +1,11 @@
+.post-step-container {
+    position: absolute;
+    left: calc((100% - 700px)/2);
+    height: 500px;
+    width: 700px;
+    top: calc((100% - 500px)/2);
+    background-color: #D7DAE7;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+}

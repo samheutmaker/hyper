@@ -1,0 +1,9 @@
+<section class="event-container">
+	<div class="event-container-inside">
+		<div class="event-wrapper">
+			<article class="event-item ng-trans ng-trans-fade-left" data-ng-repeat="event in events | filter:filter | limitTo:600 ">
+				{{event.name}}
+			</article>
+		</div>
+	</div>
+</section>
