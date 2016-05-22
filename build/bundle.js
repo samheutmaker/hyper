@@ -66,8 +66,11 @@
 	      .when('/post', {
 	        templateUrl: 'views/post.html'
 	      })
+	      .when('/event/:eventId', {
+	        templateUrl: 'views/detail.html'
+	      })
 	  }
-	])
+	]);
 
 
 
@@ -116,6 +119,20 @@
 
 	hyper.controller('EventPageController', ['$scope',
 	  function($scope) {
+
+
+	  }
+	]);
+
+	hyper.controller('DetailPageController', ['$scope', '$routeParams', 'Events',
+	  function($scope, $routeParams, Events) {
+
+	    $scope.eventDetails = null;
+
+	    Events.getEventDetails($routeParams.eventId).then(function(eventDetails) {
+	      $scope.eventDetails = eventDetails.data;
+	      console.log($scope.eventDetails);
+	    });
 
 
 	  }
@@ -35921,11 +35938,12 @@
 	          if (Events.events.length) {
 	            $timeout(function(){
 	              $scope.events = Events.events;  
-	            }, 300);
+	            }, 250);
 	          } else {
 	            Events.getCurrentEvents()
 	              .then(() => {
 	                $scope.events = Events.events;
+	                console.log($scope.events);
 	              });
 	          }
 	        }
@@ -35965,7 +35983,7 @@
 	module.exports = function(app) {
 	  app.factory('Events', ['$http', 'EE',
 	    function($http, EE) {
-	      var baseURI = ("http://192.168.99.100:8888") + '/api/events';
+	      var baseURI = ("http://localhost:8888") + '/api/events';
 	      const Events = {
 	        events: [],
 	        userEvents: [],
@@ -35983,6 +36001,17 @@
 	            console.log('inside')
 	            Events.events = res.data;
 	          });
+	        },
+	        getEventDetails: function(eventId) {
+	          var eventDetails = Events.events.filter(function(el, i){
+	            return (el._id === eventId) ? true : false;
+	          })[0];
+
+	          var res = {
+	            data: eventDetails
+	          };
+
+	          return (eventDetails) ? new Promise((resolve) => resolve(res)) : $http.get(baseURI + '/detail/' + eventId);
 	        },
 	        search: function(query) {
 	          return $http.post(baseURI + '/search', query);
@@ -36018,7 +36047,7 @@
 	module.exports = function(app) {
 	  app.factory('AuthFactory', ['$http',
 	    function($http) {
-	      var baseURI = ("http://192.168.99.100:8888") + '/auth'
+	      var baseURI = ("http://localhost:8888") + '/auth'
 	      return {
 	        login: function(data) {
 

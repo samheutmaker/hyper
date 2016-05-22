@@ -20,8 +20,11 @@ hyper.config(['$routeProvider', '$locationProvider',
       .when('/post', {
         templateUrl: 'views/post.html'
       })
+      .when('/event/:eventId', {
+        templateUrl: 'views/detail.html'
+      })
   }
-])
+]);
 
 
 
@@ -70,6 +73,20 @@ hyper.controller('PostPageController', ['$scope',
 
 hyper.controller('EventPageController', ['$scope',
   function($scope) {
+
+
+  }
+]);
+
+hyper.controller('DetailPageController', ['$scope', '$routeParams', 'Events',
+  function($scope, $routeParams, Events) {
+
+    $scope.eventDetails = null;
+
+    Events.getEventDetails($routeParams.eventId).then(function(eventDetails) {
+      $scope.eventDetails = eventDetails.data;
+      console.log($scope.eventDetails);
+    });
 
 
   }

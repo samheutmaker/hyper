@@ -7,7 +7,9 @@ const concat = require('gulp-concat');
 const files = {
   all: [__dirname + '/app/**/*.html',
     __dirname + '/app/*.html',
-    __dirname + '/app/js/*.js'
+    __dirname + '/app/js/*.js',
+    __dirname + '/app/js/**/*.js',
+    __dirname + '/app/js/**/**/*.js'
   ],
   sass: [__dirname + '/app/styles/sass/**/*.scss',
          __dirname + '/app/styles/css/*.css'

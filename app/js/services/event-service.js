@@ -20,6 +20,17 @@ module.exports = function(app) {
             Events.events = res.data;
           });
         },
+        getEventDetails: function(eventId) {
+          var eventDetails = Events.events.filter(function(el, i){
+            return (el._id === eventId) ? true : false;
+          })[0];
+
+          var res = {
+            data: eventDetails
+          };
+
+          return (eventDetails) ? new Promise((resolve) => resolve(res)) : $http.get(baseURI + '/detail/' + eventId);
+        },
         search: function(query) {
           return $http.post(baseURI + '/search', query);
         }

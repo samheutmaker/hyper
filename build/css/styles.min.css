@@ -152,7 +152,43 @@ nav {
         -webkit-border-radius: 5px 5px 5px 5px; }
         .event-container .event-container-inside .event-wrapper .event-item:hover {
           cursor: pointer; }
+        .event-container .event-container-inside .event-wrapper .event-item h2.event-item-name {
+          font-size: 1.2rem;
+          font-weight: normal;
+          margin: 10px 5px;
+          color: #515b87; }
+        .event-container .event-container-inside .event-wrapper .event-item .event-item-date {
+          position: relative;
+          margin: 5px;
+          padding: 0px;
+          font-size: 0.9rem; }
+        .event-container .event-container-inside .event-wrapper .event-item .event-item-desc {
+          font-size: 0.8rem;
+          color: #515b87; }
+        .event-container .event-container-inside .event-wrapper .event-item ul.event-item-tag-list {
+          list-style: none;
+          position: relative;
+          width: 100%;
+          padding: 0px;
+          margin: 0px; }
+          .event-container .event-container-inside .event-wrapper .event-item ul.event-item-tag-list li.event-item-tag {
+            float: left;
+            width: 50%;
+            margin: 0px;
+            padding: 0px;
+            color: #515b87;
+            text-align: center; }
 
+.post-step-container {
+  position: absolute;
+  left: calc((100% - 700px)/2);
+  height: 500px;
+  width: 700px;
+  top: calc((100% - 500px)/2);
+  background-color: #D7DAE7;
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px; }
 
 .search-container {
   top: 200px;

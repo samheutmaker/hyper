@@ -1,4 +1,4 @@
-$width: 100%;
+@import "_colors";
 
 .event-container {
     position: absolute;
@@ -19,22 +19,21 @@ $width: 100%;
         overflow: scroll;
 
         .event-wrapper {
-        	position: relative;
-            
+            position: relative;
             margin: 0 auto;
             height: 1000px;
-        
-	      @media screen and (min-width: 740px) {
-				width: 540px;
+
+            @media screen and (min-width: 740px) {
+                width: 540px;
             }
 
             @media screen and (min-width: 1010px) {
-				width: 810px;
-            }
-            @media screen and (min-width: 1280px) {
-				width: 1080px;
+                width: 810px;
             }
 
+            @media screen and (min-width: 1280px) {
+                width: 1080px;
+            }
 
             .event-item {
                 position: relative;
@@ -43,9 +42,6 @@ $width: 100%;
                 padding-left: 10px;
                 padding-right: 10px;
                 margin: 10px;
-
-                // background-color: #D7DAE7;
-
                 background-color: #D7DAE7;
                 float: left;
                 -webkit-box-shadow: 0px 2px 12px -3px rgba(0, 0, 0, 0.5);
@@ -57,6 +53,42 @@ $width: 100%;
 
                 &:hover {
                     cursor: pointer;
+                }
+
+                h2.event-item-name {
+                    font-size: 1.2rem;
+                    font-weight: normal;
+                    margin: 10px 5px;
+                    color: darken($dark_purple, 45%);
+                }
+
+                .event-item-date {
+                    position: relative;
+                    margin: 5px;
+                    padding: 0px;
+                    font-size: 0.9rem;
+                }
+
+                .event-item-desc {
+                    font-size: 0.8rem;
+                    color: darken($dark_purple, 45%);
+                }
+
+                ul.event-item-tag-list {
+                    list-style: none;
+                    position: relative;
+                    width: 100%;
+                    padding: 0px;
+                    margin: 0px;
+
+                    li.event-item-tag {
+                        float: left;
+                        width: 50%;
+                        margin: 0px;
+                        padding: 0px;
+                        color: darken($dark_purple, 45%);
+                        text-align: center;
+                    }
                 }
             }
         }

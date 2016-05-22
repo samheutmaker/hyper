@@ -39,6 +39,7 @@ module.exports = function(app) {
             Events.getCurrentEvents()
               .then(() => {
                 $scope.events = Events.events;
+                console.log($scope.events);
               });
           }
         }
